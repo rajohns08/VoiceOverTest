@@ -9,17 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        button.accessibilityLabel = "You can tap this really long string that i'm testing"
+        label.accessibilityLabel = "This is a label"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        label.isHidden = !label.isHidden
+        if !label.isHidden {
+            UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, label)
+        }
     }
-
-
 }
-
